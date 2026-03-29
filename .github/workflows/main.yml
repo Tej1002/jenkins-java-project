@@ -50,7 +50,7 @@ jobs:
     steps:
       - name: Install Tomcat (if not installed)
         run: |
-          sudo yum install -y tomcat 
+          sudo yum install -y tomcat9 
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -65,12 +65,12 @@ jobs:
 
       - name: Deploy to Tomcat
         run: |
-          sudo cp app.war /usr/share/tomcat/webapps/ || sudo cp app.war /var/lib/tomcat9/webapps/
+          sudo cp app.war /var/lib/tomcat9/webapps/
 
       - name: Start Tomcat
         run: |
-          sudo systemctl enable tomcat || sudo systemctl enable tomcat9
-          sudo systemctl restart tomcat || sudo systemctl restart tomcat9
+          sudo systemctl enable tomcat9
+          sudo systemctl restart tomcat9
 
 
 
@@ -81,7 +81,7 @@ jobs:
     steps:
       - name: Install Tomcat (if not installed)
         run: |
-          sudo yum install -y tomcat 
+          sudo yum install -y tomcat9 
       - name: Configure Tomcat users
         run: |
           sudo bash -c 'cat <<EOF > /usr/share/tomcat/conf/tomcat-users.xml
@@ -103,9 +103,9 @@ jobs:
 
       - name: Deploy to Tomcat
         run: |
-          sudo cp app.war /usr/share/tomcat/webapps/ || sudo cp app.war /var/lib/tomcat9/webapps/
+          sudo cp app.war /var/lib/tomcat9/webapps/
 
       - name: Restart Tomcat
         run: |
-          sudo systemctl enable tomcat || sudo systemctl enable tomcat9
-          sudo systemctl restart tomcat || sudo systemctl restart tomcat9
+          sudo systemctl enable tomcat9
+          sudo systemctl restart tomcat9

@@ -82,16 +82,7 @@ jobs:
       - name: Install Tomcat (if not installed)
         run: |
           sudo yum install -y tomcat9 
-      - name: Configure Tomcat users
-        run: |
-          sudo bash -c 'cat <<EOF > /etc/tomcat/tomcat-users.xml
-            <tomcat-users>
-              <role rolename="manager-gui"/>
-              <role rolename="admin-gui"/>
-              <user username="admin" password="Teju123" roles="manager-gui,admin-gui"/>
-            </tomcat-users>
-            EOF'
-
+    
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:

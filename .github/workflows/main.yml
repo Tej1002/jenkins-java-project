@@ -6,6 +6,7 @@ on:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_REGION: us-east-1
   S3_BUCKET: artifact.repository63
   ARTIFACT_NAME: app-${{ github.run_number }}.war
 
@@ -32,6 +33,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Build and Test
         run: mvn clean package
@@ -55,6 +57,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Download artifact from S3
         run: |
@@ -85,7 +88,7 @@ jobs:
             <tomcat-users>
               <role rolename="manager-gui"/>
               <role rolename="admin-gui"/>
-              <user username="admin" password="admin123" roles="manager-gui,admin-gui"/>
+              <user username="admin" password="Teju123" roles="manager-gui,admin-gui"/>
             </tomcat-users>  EOF'
 
       - name: Configure AWS credentials
@@ -93,6 +96,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
       - name: Download artifact from S3
         run: |
           aws s3 cp s3://$S3_BUCKET/$ARTIFACT_NAME app.war

@@ -78,8 +78,7 @@ jobs:
     steps:
       - name: Install Tomcat (if not installed)
         run: |
-          sudo yum install -y tomcat || sudo apt-get install -y tomcat9 || true
-
+          sudo yum install -y tomcat 
       - name: Configure Tomcat users
         run: |
           sudo bash -c 'cat <<EOF > /usr/share/tomcat/conf/tomcat-users.xml

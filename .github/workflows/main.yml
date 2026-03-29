@@ -12,7 +12,7 @@ env:
 jobs:
 
   build:
-    runs-on: [self-hosted, github_actions]
+    runs-on: [self-hosted, githubs_actions]
 
     steps:
       - uses: actions/checkout@v4
